@@ -1,0 +1,23 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "southcentralus"
+        },
+        "dbServerName": {
+            "value": "misinformation"
+        },
+        "dbAdminUser": {
+            "value": "dbadmin"
+        },
+        "dbAdminPassword": {
+            "reference": {
+              "keyVault": {
+                "id": "/subscriptions/8b6c45c2-5444-4604-8598-fef07cc7efa9/resourceGroups/misinformation-common/providers/Microsoft.KeyVault/vaults/misinformation-admin"
+              },
+              "secretName": "database-admin"
+            }
+        },
+    }
+}
