@@ -23,6 +23,9 @@
             "defaultValue": true
         }
     },
+    "variables": {
+      "databaseName": "[parameters('dbServerName')]"
+    },
     "resources": [
         {
             "apiVersion": "2015-05-01-preview",
@@ -34,6 +37,24 @@
                 "version": "12.0"
             },
             "resources": [
+                {
+                  "name": "[variables('databaseName')]",
+                  "type": "databases",
+                  "location": "[parameters('location')]",
+                  "tags": {
+                      "displayName": "Misinformation"
+                  },
+                  "apiVersion": "2015-01-01",
+                  "dependsOn": [
+                      "[concat('Microsoft.Sql/servers/', parameters('dbServerName'))]"
+                  ],
+                  "properties": {
+                    "edition": "Basic",
+                    "collation": "SQL_Latin1_General_CP1_CI_AS",
+                    "maxSizeBytes": "2147483648",
+                    "requestedServiceObjectiveName": "Basic"
+                  }
+                },
                 {
                     "condition": "[parameters('dbAllowAzureIps')]",
                     "apiVersion": "2014-04-01-preview",
