@@ -5,8 +5,7 @@ Deployment scripts for the database supporting the misinformation project.
 See [main project](https://github.com/alan-turing-institute/misinformation) for
 project board and issues.
 
-## Deployment
-### Pre-requisites
+## Pre-requisites
 #### Azure CLI
 Ensure you have the [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/) is
 installed. This is a command line client for administering Azure resources. The
@@ -24,9 +23,16 @@ field. This will only ever be accessed programatically so can be as random and
 complex as you like. It is recommended to randomly generate a long (16+
 characters) password that uses at lower case letters, upper case letters and
 numbers. If supported by the random generator, you should also include special
-characters (e.g. £$%^& etc).
+characters (e.g. £$%^& etc). All users who are authorised to deploy the
+database server should be added as principals in the "Access policies" section
+of the KeyVault. The KeyVault should also be set to enable access to Azure
+Resource Manager for template deployment in "Advanced access policies" part of
+the "Access policies" section.
 
-### Deploy the Azure PaaS database server
+**TODO:** Script creation of the KeyVault. This should securely generate a
+strong secret and add the necessary users (ideally using a security group).
+
+## Deploy the Azure PaaS database server
 1. Ensure you are logged into the Azure CLI.
 ```
 az login
@@ -49,3 +55,5 @@ az group deployment create \
 ```
 If you get the error `No module named 'msrest.polling'` then manually install
 the missing package using `pip install msrestazure`.
+
+## Create the database
