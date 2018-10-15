@@ -16,7 +16,7 @@ installation methods](https://docs.microsoft.com/en-us/cli/azure/install-azure-c
 pip install azure-cli
 ```
 
-#### Project KeyVault
+#### Project admin KeyVault
 There should be a KeyVault named `misinformation-admin` in the
 `misinformation-common` Azure subscription. All users who are authorised to
 deploy and administer the database server should be added as principals in the
@@ -37,6 +37,30 @@ special characters (e.g. £$%^& etc).
 self-signed, have a **Subject** set to `CN=admin-sp.misinformation.turing.ac.uk`
 a validity of 12 months and an auto-renewal trigger set to 90% of the validity
 period.
+
+#### Project user KeyVault
+There should be a KeyVault named `misinformation-user` in the
+`misinformation-common` Azure subscription. All users who are authorised to
+deploy and administer the database server should be added as principals in the
+"Access policies" section of the KeyVault. The KeyVault should be set to enable
+access to Azure Resource Manager for template deployment in "Advanced access
+policies" part of the "Access policies" section.
+
+The KeyVault should contain the following sensitive secrets.
+
+1. A **Secret** named `database-crawler-user` containing a strong password in
+its "value" field. This will only ever be accessed programatically so can be as
+random and complex as you like. It is recommended to randomly generate a long
+(16+ characters) password that uses at lower case letters, upper case letters
+and numbers. If supported by the random generator, you should also include
+special characters (e.g. £$%^& etc).
+
+2. A **Secret** named `database-annotation-user` containing a strong password in
+its "value" field. This will only ever be accessed programatically so can be as
+random and complex as you like. It is recommended to randomly generate a long
+(16+ characters) password that uses at lower case letters, upper case letters
+and numbers. If supported by the random generator, you should also include
+special characters (e.g. £$%^& etc).
 
 #### Azure SQL Data Studio
 We use [Azure SQL Data Studio](https://docs.microsoft.com/en-gb/sql/azure-data-studio/download)
@@ -76,6 +100,21 @@ az group deployment create \
 ```
 If you get the error `No module named 'msrest.polling'` then manually install
 the missing package using `pip install msrestazure`.
+
+## Create users for the crawler and the annotation tool
+1. Browse to the Misinformation database in the Azure portal.
+2. Click on the "Query editor" option in the menu sidebar and log in with  
+"SQL server authentication" option, with user `dbadmin` and the password you
+created earlier and stored in the `database-admin` KeyVault secret.
+3. Run the following commands to create database users for the crawler and
+   annotator apps, using `database-crawler-user` and
+   `database-annotation-user` as the usernames and the corresponding
+   KeyVault secrets created earlier as the passwords.
+```
+CREATE USER [user_name] WITH PASSWORD = 'strong_password';
+```
+
+**TODO:** Add instructions for enabling and using AAD SSO once Service Principal creation by AAD members works.
 
 ## Create the required tables
 The following steps will ensure the required tables exist in the Misinformation
