@@ -1,16 +1,11 @@
--- Create the raw crawl table
+IF OBJECT_ID('[raw_crawl]', 'U') IS NULL
 CREATE TABLE [raw_crawl]
 (
     [id] INT NOT NULL IDENTITY PRIMARY KEY,
-    [page_url] NVARCHAR(850) NOT NULL, -- Max length restricted to half the 1700 byte max for a nonclustered index (max NVCHAR is 4000 and RFC 7230, section 3.1.1 recommends supporting at least 8000 octets)
-    [site_url] NVARCHAR(800) NOT NULL, -- Max length restricted to less than half the 1700 byte max to permit some space for composite indexes including site URL
+    [page_url_prefix] NVARCHAR(800) NOT NULL, -- Max non-clustesred index is 1700 chars. At worst case 2 bytes per UTF-16 char, this is 850 chars. Leave spare bytes for composite indexes.
+    [page_url] NVARCHAR(4000) NOT NULL, -- Max nvarchar length is 4000 (although RFC 7230, section 3.1.1 recommends supporting at least 8000 octets)
+    [site_url] NVARCHAR(4000) NOT NULL, 
     [crawl_date] DATETIMEOFFSET(7), -- Datetime with timezone information
     [request] VARBINARY(max) NOT NULL,
     [raw_responses] VARBINARY(max) NOT NULL
 );
-GO
--- Create indexes 
-CREATE UNIQUE INDEX [page_url_index] ON [raw_crawl] ([page_url] ASC);
-CREATE INDEX [crawl_site_index] ON [raw_crawl] ([site_url] ASC);
-CREATE INDEX [crawl_run_index] ON [raw_crawl] ([site_url] ASC, [crawl_date] ASC);
-GO
