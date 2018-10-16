@@ -199,9 +199,11 @@ details form.
     for each new file.
 
 ## Useful queries
-- `select_n_articles_per_site.sql`: Select N articles for each site. Articles
-  are ordered by ID within each site group, so the first N articles selected
-  for each site will remain consistent across multiple query runs and as N is
-  made smaller or larger.
+- `select_n_articles_per_site.sql`: Select N articles for each site. The
+  ordering of articles within each site grouping is fixed (determined by the
+    auto incremented ID column), regardless of the chosen N, so increasing N
+    will always result in a strict superset of the previously selected articles
+    and reducing N will always result in a strict subset of previously selected
+    articles.
 - `articles_per_site`: Lists all unique sites in articles table, along with the
   number of articles for each site.
