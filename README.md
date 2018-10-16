@@ -62,6 +62,13 @@ random and complex as you like. It is recommended to randomly generate a long
 and numbers. If supported by the random generator, you should also include
 special characters (e.g. £$%^& etc).
 
+3. A **Secret** named `database-crawl-storage-read` containing an SAS token with
+read-only access to the https://misinformation.blob.core.windows.net/crawl
+Azure blob storage container in its "value" field. This SAS token should be
+bound to a policy to allow it to be revoked. You can create policies and
+SAS tokens bound to them by right-clicking on the storage container in Azure
+Storage Explorer.
+
 #### Azure SQL Data Studio
 We use [Azure SQL Data Studio](https://docs.microsoft.com/en-gb/sql/azure-data-studio/download)
 to run SQL queries against the Misinformation database we create. We use these SQL
