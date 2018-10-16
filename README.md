@@ -197,3 +197,11 @@ details form.
     file in the `crawl` container of the `misinformation` storage account. You
     will need to replace the filename immediately following the `BULK` keyword
     for each new file.
+
+## Useful queries
+- `select_n_articles_per_site.sql`: Select N articles for each site. Articles
+  are ordered by ID within each site group, so the first N articles selected
+  for each site will remain consistent across multiple query runs and as N is
+  made smaller or larger.
+- `articles_per_site`: Lists all unique sites in articles table, along with the
+  number of articles for each site.
