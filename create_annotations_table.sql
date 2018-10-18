@@ -5,6 +5,7 @@ CREATE TABLE [annotations]
     [article_url] NVARCHAR(800) NOT NULL, -- Max non-clustesred index is 1700 chars. At worst case 2 bytes per UTF-16 char, this is 850 chars. Leave spare bytes for composite indexes. Note RFC 7230, section 3.1.1 recommends supporting at least 8000 octets for URLs 
     [annotation] NVARCHAR(max) NULL,
     [user_id] NVARCHAR(20) NOT NULL,
+    [user_proficiency] NVARCHAR(20) NOT NULL,
     [created_date] DATETIMEOFFSET(7) NULL, -- Datetime with timezone information
     [updated_date] DATETIMEOFFSET(7) NULL, -- Datetime with timezone information
     [status] INT NULL
