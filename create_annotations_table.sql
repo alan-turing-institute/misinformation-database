@@ -8,7 +8,7 @@ CREATE TABLE [annotations]
     [user_proficiency] NVARCHAR(20) NOT NULL,
     [created_date] DATETIMEOFFSET(7) NULL, -- Datetime with timezone information
     [updated_date] DATETIMEOFFSET(7) NULL, -- Datetime with timezone information
-    [status] INT NULL
+    [num_sources] INT NULL  -- Number of sources identified, to allow lookup of inconsistent annotations
 );
 GO
 IF OBJECT_ID('[annotations]', 'U') IS NULL
