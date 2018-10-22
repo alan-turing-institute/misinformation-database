@@ -5,7 +5,7 @@ FROM OPENROWSET (BULK 'youngcons.com_extracted.txt',
     DATA_SOURCE = 'misinformation_crawl_container',
     SINGLE_CLOB) as j
 
-INSERT INTO [articles](crawl_id, crawl_date, site_name, article_url,
+INSERT INTO [articles_v2](crawl_id, crawl_date, site_name, article_url,
     title, author, publication_date, plain_content,
     structured_content, metadata)
 SELECT 
