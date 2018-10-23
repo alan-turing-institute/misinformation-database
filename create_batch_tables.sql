@@ -4,7 +4,8 @@ CREATE TABLE [batch]
     [id] INT NOT NULL IDENTITY PRIMARY KEY,
     [name] NVARCHAR(max),
     [priority] INT,
-    [created_date] DATETIMEOFFSET(7)
+    [created_date] DATETIMEOFFSET(7),
+    [active] BIT NOT NULL
 );
 GO
 IF OBJECT_ID('[batch_article]', 'U') IS NULL
