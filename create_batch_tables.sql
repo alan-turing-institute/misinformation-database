@@ -10,7 +10,8 @@ GO
 IF OBJECT_ID('[batch_article]', 'U') IS NULL
 CREATE TABLE [batch_article]
 (
-    [batch_id] INT NOT NULL IDENTITY PRIMARY KEY,
+    [id] INT NOT NULL IDENTITY PRIMARY KEY,
+    [batch_id] INT NOT NULL,
     [article_url] NVARCHAR(800),
     [added_date] DATETIMEOFFSET(7)
 );
