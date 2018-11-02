@@ -1,1 +1,1 @@
-DELETE FROM articles_v2
+DELETE FROM articles_v3

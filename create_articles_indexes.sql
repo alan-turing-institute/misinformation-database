@@ -1,11 +1,9 @@
-IF EXISTS(SELECT * FROM sys.indexes WHERE object_id = object_id('articles_v2') AND NAME ='article_url_index')
-    DROP INDEX article_url_index ON articles_v2;
-IF EXISTS(SELECT * FROM sys.indexes WHERE object_id = object_id('articles_v2') AND NAME ='site_name_index')
-    DROP INDEX site_name_index ON articles_v2;
-IF EXISTS(SELECT * FROM sys.indexes WHERE object_id = object_id('articles_v2') AND NAME ='crawl_run_index')
-    DROP INDEX crawl_run_index ON articles_v2;
+DROP INDEX IF EXISTS [article_url_index] ON [articles_v3]
+DROP INDEX IF EXISTS [site_name_index] ON [articles_v3]
+DROP INDEX IF EXISTS [crawl_run_index] ON [articles_v3]
 GO
-CREATE UNIQUE INDEX [article_url_index] ON [articles_v2] ([article_url] ASC);
-CREATE INDEX [site_name_index] ON [articles_v2] ([site_name] ASC);
-CREATE INDEX [crawl_run_index] ON [articles_v2] ([site_name] ASC, [crawl_date] ASC);
+CREATE UNIQUE INDEX [article_url_index] ON [articles_v3] ([article_url] ASC);
+CREATE INDEX [site_name_index] ON [articles_v3] ([site_name] ASC);
+CREATE INDEX [crawl_run_index] ON [articles_v3] ([site_name] ASC, [crawl_datetime] ASC);
+CREATE INDEX [publication_datetime_article_url] ON [articles_v3] ([publication_datetime] ASC, [article_url] ASC);
 GO
