@@ -1,3 +1,3 @@
-IF OBJECT_ID('[articles_v3]', 'U') IS NOT NULL
-DROP TABLE [articles_v3]
+IF OBJECT_ID('[articles_v4]', 'U') IS NOT NULL
+DROP TABLE [articles_v4]
 GO

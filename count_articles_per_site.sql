@@ -1,3 +1,3 @@
 SELECT site_name, COUNT(*) AS num_articles
-FROM articles_v3
+FROM articles_v4
 GROUP BY site_name
