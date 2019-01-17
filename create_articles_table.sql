@@ -1,5 +1,5 @@
-IF OBJECT_ID('[articles_v4]', 'U') IS NULL
-CREATE TABLE [articles_v4]
+IF OBJECT_ID('[articles_v5]', 'U') IS NULL
+CREATE TABLE [articles_v5]
 (
     [id] INT NOT NULL IDENTITY PRIMARY KEY,
     [crawl_id] UNIQUEIDENTIFIER,
@@ -15,10 +15,10 @@ CREATE TABLE [articles_v4]
     [metadata] NVARCHAR(max) NULL,
 );
 GO
-IF OBJECT_ID('[articles_v4]', 'U') IS NULL
-ALTER TABLE [articles_v4]
+IF OBJECT_ID('[articles_v5]', 'U') IS NULL
+ALTER TABLE [articles_v5]
 ADD CONSTRAINT [plain_text_as_json]
 CHECK (ISJSON([plain_text])=1);
-ALTER TABLE [articles_v4]
+ALTER TABLE [articles_v5]
 ADD CONSTRAINT [metadata_as_json]
 CHECK (ISJSON([metadata])=1);

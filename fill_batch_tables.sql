@@ -13,4 +13,4 @@ WHERE id = 1
 
 -- Add articles into batch_article table
 INSERT INTO [batch_article](batch_id, article_url, added_date)
-SELECT 4, article_url, '01/09/2019' FROM [articles_v4]
+SELECT 4, article_url, '01/09/2019' FROM [articles_v5]
