@@ -5,7 +5,7 @@ DECLARE @CursorResult TABLE (article_url nvarchar(800))
 
 BEGIN
    SET @SiteCursor = CURSOR FOR
-   SELECT DISTINCT site_name from dbo.articles_v5
+   SELECT DISTINCT site_name from dbo.articles_dev
 
    OPEN @SiteCursor
    FETCH NEXT FROM @SiteCursor
@@ -15,7 +15,7 @@ BEGIN
    BEGIN
        INSERT INTO @CursorResult
        SELECT TOP (10) article_url
-       FROM articles_v5
+       FROM articles_dev
        WHERE site_name = @SiteUrl
 
        FETCH NEXT FROM @SiteCursor
