@@ -6,5 +6,6 @@ SELECT site_name,
     COUNT(*) AS total
 FROM articles_dev
 GROUP BY site_name
+ORDER BY site_name
 
 -- SELECT * FROM articles_dev WHERE publication_datetime is NULL
